@@ -12,29 +12,23 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
       - name: Setup Java JDK
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
       - name: Install Dependencies & Setup Capacitor
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android
           mkdir -p www
           cp -r index.html styles.css data.js app.js manifest.json service-worker.js www/ 2>/dev/null || true
           
-          # 설정 파일이 없으면 자동 생성
+          # 설정 파일 자동 생성
           if [ ! -f "capacitor.config.json" ]; then
             npx cap init "저메추" "com.toss.jomechu" --web-dir www
           fi
           
-          # 안드로이드 프로젝트 자동 생성 및 동기화
+          # 안드로이드 프로젝트 생성 및 동기화
           if [ ! -d "android" ]; then
             npx cap add android
           fi
@@ -42,6 +36,8 @@ jobs:
           npx cap sync android
       - name: Build Android Debug APK
         working-directory: android
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
         run: |
           chmod +x ./gradlew
           ./gradlew assembleDebug --no-daemon
