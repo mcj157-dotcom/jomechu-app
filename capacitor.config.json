@@ -1,0 +1,6 @@
+{
+  "appId": "com.toss.jomechu",
+  "appName": "저메추",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

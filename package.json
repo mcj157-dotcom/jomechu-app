@@ -1,0 +1,14 @@
+{
+  "name": "jomechu-app",
+  "version": "1.0.0",
+  "description": "야근 저녁 메뉴 추천 안드로이드 앱",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static web ready'"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  }
+}
